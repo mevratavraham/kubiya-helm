@@ -1,0 +1,11 @@
+apiVersion: v2
+name: kubiya-operator
+description: A Helm chart for deploying the Kubiya Operator on Kubernetes
+type: application
+version: 1.0.0
+appVersion: "1.0"
+dependencies:
+  - name: openfaas
+    version: "8.0.2"
+    repository: "https://openfaas.github.io/faas-netes/"
+    condition: openfaas.enabled

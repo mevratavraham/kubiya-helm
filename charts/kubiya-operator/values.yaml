@@ -1,0 +1,41 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/kubiyabot/kubiya-operator
+  pullPolicy: IfNotPresent
+  tag: "stable"
+
+# Namespace where OpenFaaS is installed (used by some templates)
+openfaas:
+  namespace: openfaas
+  basicAuthSecretName: "basic-auth"
+
+# Name of the NATS credentials secret (must be created by the user in the same namespace)
+natsCredsSecretName: "nats-creds"
+
+# Configuration for copying the basic-auth secret from OpenFaaS namespace to this chart's namespace
+copySecrets:
+  enabled: true
+  sourceSecretName: "basic-auth"
+  targetSecretName: "basic-auth-kubiya"  # Optional: Rename the secret if required
+
+# Service account configuration
+serviceAccount:
+  create: true
+  name: kubiya-operator-sa  # Name of the service account to use
+
+# Resource limits and requests
+resources:
+  limits:
+    cpu: "100m"
+    memory: "128Mi"
+  requests:
+    cpu: "100m"
+    memory: "128Mi"
+
+# Node selector, tolerations, and affinity for pod scheduling
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
